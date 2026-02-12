@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import NavBar from "@/components/Header";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,11 +15,13 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Rick and Morty Trivia",
   description: "Test your knowledge about Rick and Morty with this trivia game!",
+  icons : {icon: "/RnMicon2.png"}
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <NavBar />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
