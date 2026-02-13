@@ -4,12 +4,14 @@ export default function Home() {
   return (
     <>
       <main>
+        {/* Welcome or Hero Section */}
         <section
           className={
             bgimageStyling +
             " flex flex-col items-center justify-start text-center gap-8  p-4"
           }
         >
+          {/* Importing and displaying Rick and Morty Text Image */}
           <Image
             src="/rnmtext2.png"
             alt="Rick and Morty"
@@ -28,6 +30,7 @@ export default function Home() {
         </section>
       </main>
 
+      {/* Author section to display information about the creator of this project */}
       <section className="flex flex-col max-w-3xl mx-auto my-12 gap-4 p-4">
         <h2 className="text-2xl font-bold text-gray-800">Created by</h2>
         <div className="flex flex-wrap gap-6 items-start">
@@ -60,5 +63,6 @@ export default function Home() {
   );
 }
 
+// styling for the background image with dark overlay
 const bgimageStyling =
   "w-full bg-cover bg-start bg-[linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.8)),url('/rickandmortybg.jpg')] ";

@@ -1,12 +1,11 @@
 'use client';
 
 import {useEffect, useState} from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Characters() {
   const [characters, setCharacters] = useState([]);
-
+    // Fetch characters from the API
   const fetchCharacters = async () => {
         try {
             const response = await fetch("https://rickandmortyapi.com/api/character");
@@ -18,6 +17,7 @@ export default function Characters() {
             console.error("Error fetching characters:", error);
         }
     };
+    //useEffect to fetch characters once/the component mounts
     useEffect(() => {
         fetchCharacters();
     }, []); 
@@ -26,6 +26,8 @@ export default function Characters() {
         <main className="flex flex-col items-center justify-start text-center gap-8  p-4">
             <h1 className="text-4xl font-bold text-gray-800">Rick and Morty Characters</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                {/* Map through characters and display their names and species */}
                 {characters.map((character) => (
                     <div key={character.id} className="bg-white rounded-lg shadow-md overflow-hidden">
                         
