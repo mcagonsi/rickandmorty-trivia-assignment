@@ -29,7 +29,7 @@ export default function Characters() {
 
                 {/* Map through characters and display their names and species */}
                 {characters.map((character) => (
-                    <div key={character.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div key={character.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                         
                         <div className="p-4">
                             <Link href={`/characters/${character.id}`}>
