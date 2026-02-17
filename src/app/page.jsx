@@ -47,7 +47,7 @@ export default function Home() {
               href="https://github.com/mcagonsi/rickandmorty-trivia-assignment.git"
               className="text-sm text-blue-500 hover:underline"
             >
-              GitHub Profile
+              GitHub Project Link
             </a>
           </aside>
           <p className="text-lg text-gray-500 max-w-[400px] h-full">
