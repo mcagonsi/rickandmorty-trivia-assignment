@@ -8,6 +8,9 @@ export async function generateStaticParams(){
     const response = await fetch(
       `https://rickandmortyapi.com/api/character`
     );
+    if (!response.ok) {
+      throw new Error("Failed to fetch characters");
+    }
     const data = await response.json();
     return data.results;
 
@@ -27,7 +30,11 @@ export default async function CharacterDetailPage({ params }) {
     const response = await fetch(
       `https://rickandmortyapi.com/api/character/${id}`
     );
+    if (!response.ok) {
+      throw new Error("Failed to fetch character");
+    }
     const data = await response.json();
+    console.log("Fetched character detail:", data);
     return data;
   };
 
