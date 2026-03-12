@@ -12,6 +12,7 @@ export default function Character({ character }) {
             className="w-48 h-48 rounded-full"
             width={200}
             height={200}
+           
           />
           <div className="text-left max-w-md">
             <h2 className="text-2xl font-bold text-gray-800">Name: {character.name}</h2>
