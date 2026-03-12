@@ -5,7 +5,7 @@ const fetchCharacters = async () => {
   try {
     const response = await fetch("https://rickandmortyapi.com/api/character");
     const data = await response.json();
-    console.log("Fetched characters page:", data.results); // Log the fetched data
+
     return data.results;
   } catch (error) {
     console.error("Error fetching characters:", error);

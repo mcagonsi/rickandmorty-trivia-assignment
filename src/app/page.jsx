@@ -42,7 +42,7 @@ export default function Home() {
               height={150}
               className="rounded-full"
             />
-            <p className="text-lg text-gray-700">Michael Agonsi</p>
+            <p className="text-lg text-gray-700">Michael C. Agonsi</p>
             <a
               href="https://github.com/mcagonsi/rickandmorty-trivia-assignment.git"
               className="text-sm text-blue-500 hover:underline"

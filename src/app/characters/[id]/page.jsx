@@ -34,7 +34,7 @@ export default async function CharacterDetailPage({ params }) {
       throw new Error("Failed to fetch character");
     }
     const data = await response.json();
-    console.log("Fetched character detail:", data);
+
     return data;
   };
 
