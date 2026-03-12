@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   /* config options here */
-   images: {
-    remotePatterns: [new URL('https://rickandmortyapi.com/api/character/**')],
+  output: "export",
+  images: {
+    remotePatterns: [new URL("https://rickandmortyapi.com/api/character/**")],
+    unoptimized: true,
   },
 };
-
 
 export default nextConfig;
