@@ -4,6 +4,7 @@ const nextConfig = {
   output: "export",
   images: {
     remotePatterns: [new URL("https://rickandmortyapi.com/api/character/**")],
+    unoptimized: true,
   },
 };
 
