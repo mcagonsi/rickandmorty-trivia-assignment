@@ -3,13 +3,27 @@ import Link from "next/link";
 // converted this page to a server side page to solve the problem of static generation fetches
 const fetchCharacters = async () => {
   try {
-    const response = await fetch("https://rickandmortyapi.com/api/character");
+    const response = await fetch("http://localhost:3000/api/characters");
     const data = await response.json();
-
-    return data.results;
+    return data;
   } catch (error) {
     console.error("Error fetching characters:", error);
     return [];
+  }
+};
+
+const importData = async () => {
+  "use server";
+  try {
+    const response = await fetch("http://localhost:3000/api/characters/import", { 
+      method: "POST" 
+    });
+    
+    if (response.ok) {
+      revalidatePath("/characters");
+    }
+  } catch (error) {
+    console.error("Error importing data:", error);
   }
 };
 export default async function Characters() {
@@ -21,22 +35,35 @@ export default async function Characters() {
         Rick and Morty Characters
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {/* Map through characters and display their names and species */}
-        {characters.map((character) => (
-          <div
-            key={character.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
-          >
-            <div className="p-4">
-              <Link href={`/characters/${character.id}`}>
-                <h2 className="text-xl font-bold text-gray-800">
-                  {character.name}
-                </h2>
-                <p className="text-md text-gray-600">{character.species}</p>
-              </Link>
+        {characters.length > 0 ? (
+          characters.map((character) => (
+            <div
+              key={character._id}
+              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="p-4">
+                <Link href={`/characters/${character._id}`}>
+                  <h2 className="text-xl font-bold text-gray-800">
+                    {character.name}
+                  </h2>
+                  <p className="text-md text-gray-600">{character.species}</p>
+                </Link>
+              </div>
             </div>
+          ))
+        ) : (
+          <div className="col-span-full text-center">
+            <p className="text-xl text-gray-600 mb-4">No characters found</p>
+            <form action={importData}>
+              <button
+                type="submit"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Import Characters
+              </button>
+            </form>
           </div>
-        ))}
+        )}
       </div>
     </main>
   );
