@@ -19,7 +19,7 @@ export default function Character({ character }) {
             <p className="text-lg text-gray-600">Species: {character.species}</p>
             <p className="text-lg text-gray-600">Status: {character.status}</p>
             <p className="text-lg text-gray-600">Gender: {character.gender}</p>
-            <p className="text-lg text-gray-600">Origin: {character.origin.name}</p>
+            
           </div>
           </div>
         </main>

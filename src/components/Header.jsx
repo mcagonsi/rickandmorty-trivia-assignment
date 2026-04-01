@@ -7,6 +7,7 @@ export default function NavBar() {
       <div className="items-center gap-8 flex justify-center">
         <Link href="/">Home</Link>
         <Link href="/characters">Characters</Link>
+        <Link href="/add">Add New Characters</Link>
       </div>
     </div>
   );

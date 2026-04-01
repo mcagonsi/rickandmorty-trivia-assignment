@@ -1,32 +1,39 @@
 import Link from "next/link";
 
 // converted this page to a server side page to solve the problem of static generation fetches
-const fetchCharacters = async () => {
-  try {
-    const response = await fetch("http://localhost:3000/api/characters");
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching characters:", error);
-    return [];
-  }
-};
 
-const importData = async () => {
-  "use server";
-  try {
-    const response = await fetch("http://localhost:3000/api/characters/import", { 
-      method: "POST" 
-    });
-    
-    if (response.ok) {
-      revalidatePath("/characters");
-    }
-  } catch (error) {
-    console.error("Error importing data:", error);
-  }
-};
 export default async function Characters() {
+  
+  const fetchCharacters = async () => {
+    try {
+      const response = await fetch(`${process.env.DOMAIN_URL}/api/characters`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching characters:", error);
+      return [];
+    }
+  };
+
+  const importData = async () => {
+    "use server";
+    try {
+      const response = await fetch(
+        `${process.env.DOMAIN_URL}/api/characters/import`,
+        {
+          method: "POST",
+        }
+      );
+
+      if (response.ok) {
+       console.log('Characters imported successfully')
+      } else {
+        console.log("Failed to import characters");
+      }
+    } catch (error) {
+      console.error("Error importing data:", error);
+    }
+  };
   // handles the fetch in server style (solves the problem of static generation fetches)
   const characters = await fetchCharacters();
   return (
@@ -39,7 +46,7 @@ export default async function Characters() {
           characters.map((character) => (
             <div
               key={character._id}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              className="bg-white rounded-lg min-w-[200px] min-h-[100px] shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
             >
               <div className="p-4">
                 <Link href={`/characters/${character._id}`}>
@@ -57,10 +64,13 @@ export default async function Characters() {
             <form action={importData}>
               <button
                 type="submit"
+                title="Click to import characters from the Rick and Morty API to Mongodb"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >
                 Import Characters
               </button>
+              
+              <p className="mt-6">Please reload the page to see the imported characters after clicking import.</p>
             </form>
           </div>
         )}
