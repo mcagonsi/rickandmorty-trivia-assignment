@@ -1,7 +1,6 @@
 import { connectToDB } from "@/utils/db";
 
 export async function POST(request) {
-  console.log(request.body);
 
   const { db } = await connectToDB();
   const { name, species, image, status, gender } = await request.json();
