@@ -30,6 +30,7 @@ export default async function CharacterDetailPage({ params }) {
 
   //fetch call to get the character data based on the id
   const fetchCharacter = async () => {
+  
     const response = await fetch(
       `${process.env.DOMAIN_URL}/api/characters/${id}`
     );

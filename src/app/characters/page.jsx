@@ -13,6 +13,7 @@ const fetchCharacters = async () => {
 };
 
 const importData = async () => {
+  'use server';
   try {
     const response = await fetch(
       `${process.env.DOMAIN_URL}/api/characters/import`,
