@@ -1,39 +1,36 @@
 import Link from "next/link";
 
 // converted this page to a server side page to solve the problem of static generation fetches
+const fetchCharacters = async () => {
+  try {
+    const response = await fetch(`${process.env.DOMAIN_URL}/api/characters`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching characters:", error);
+    return [];
+  }
+};
 
-export default async function Characters() {
-  
-  const fetchCharacters = async () => {
-    try {
-      const response = await fetch(`${process.env.DOMAIN_URL}/api/characters`);
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error fetching characters:", error);
-      return [];
-    }
-  };
-
-  const importData = async () => {
-    "use server";
-    try {
-      const response = await fetch(
-        `${process.env.DOMAIN_URL}/api/characters/import`,
-        {
-          method: "POST",
-        }
-      );
-
-      if (response.ok) {
-       console.log('Characters imported successfully')
-      } else {
-        console.log("Failed to import characters");
+const importData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.DOMAIN_URL}/api/characters/import`,
+      {
+        method: "POST",
       }
-    } catch (error) {
-      console.error("Error importing data:", error);
+    );
+
+    if (response.ok) {
+      console.log("Characters imported successfully");
+    } else {
+      console.log("Failed to import characters");
     }
-  };
+  } catch (error) {
+    console.error("Error importing data:", error);
+  }
+};
+export default async function Characters() {
   // handles the fetch in server style (solves the problem of static generation fetches)
   const characters = await fetchCharacters();
   return (
@@ -69,8 +66,11 @@ export default async function Characters() {
               >
                 Import Characters
               </button>
-              
-              <p className="mt-6">Please reload the page to see the imported characters after clicking import.</p>
+
+              <p className="mt-6">
+                Please reload the page to see the imported characters after
+                clicking import.
+              </p>
             </form>
           </div>
         )}
