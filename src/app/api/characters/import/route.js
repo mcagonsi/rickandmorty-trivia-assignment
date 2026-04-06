@@ -1,6 +1,6 @@
 import { connectToDB } from "@/utils/db";
 
-export async function POST(request) {
+export async function POST() {
   const { db } = await connectToDB();
   const charactersCollection = db.collection("characters");
 

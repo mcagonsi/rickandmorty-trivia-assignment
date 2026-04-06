@@ -1,6 +1,5 @@
 import { connectToDB } from "@/utils/db";
 
-export const dynamic = "force-dynamic";
 export async function POST(request) {
     console.log(request.body)
 
